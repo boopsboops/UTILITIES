@@ -25,6 +25,7 @@ seed_generator <- function(n,mseed) {
 #seed.list <- seed_generator(n=100,mseed=42)
 # get DNAs
 #dnas.rnd <- mapply(function(x) random_DNA(length=81,gc=0.55,seed=x),x=seed.list)
+#random_DNA(length=50000,gc=0.55,seed=42)
 
 # print
 #print(dnas.rnd)
