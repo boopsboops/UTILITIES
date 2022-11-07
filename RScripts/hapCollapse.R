@@ -11,7 +11,7 @@
 # 
 
 hapCollapse <- function(data, collapseSubstrings = TRUE, clean = TRUE){
-    source("https://raw.githubusercontent.com/boopsboops/UTILITIES/master/scripts/clean_dna.R")
+    source("https://raw.githubusercontent.com/boopsboops/UTILITIES/master/RScripts/clean_dna.R")
     if(clean==TRUE){
         data <- clean_dna(data)
     }
