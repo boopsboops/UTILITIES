@@ -2,6 +2,7 @@
 
 # FUNCTION TO READ MPTP OUTPUT FILES
 read_mptp <- function(file) {
+    tree.name <- stringr::str_split_fixed(basename(file),"\\.",5)[,1]
     mptp.scan <- scan(file=file,what="character",sep="\n",quiet=TRUE)
     skiplines <- grep("Species 1:",mptp.scan)
     skiplines <- skiplines - 1
@@ -14,6 +15,8 @@ read_mptp <- function(file) {
         dplyr::mutate(mptpDelim=stringr::str_replace_all(mptpDelim,":","")) %>%
         dplyr::mutate(mptpDelim=stringr::str_replace_all(mptpDelim,"Species ","")) %>%
         dplyr::mutate(mptpDelim=paste0("mptp",str_pad(mptpDelim,pad="0",width=4))) %>%
-        dplyr::relocate(mptpDelim,.before=label)
+        dplyr::mutate(rep=tree.name) %>%
+        dplyr::relocate(mptpDelim,.before=label) %>%
+        dplyr::relocate(rep,.before=mptpDelim)
     return(mptp.tab)
 }
