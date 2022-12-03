@@ -4,7 +4,7 @@
 # sequences_removed(df=reflib,thresh=0.5)
 # threshold is a proportion of the mean sequence length
 sequences_removed <- function(df,thresh){
-    removed <- df %>% filter(lengthFrag < (median(lengthFrag)*thresh)) %>% select(dbid)
+    removed <- df %>% filter(length < (median(length)*thresh)) %>% select(dbid)
     n.removed <- length(removed$dbid)
     return(n.removed)
 }
