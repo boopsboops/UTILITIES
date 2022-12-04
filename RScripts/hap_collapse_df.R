@@ -6,7 +6,11 @@
 # add a number of each haplotype
 hap_collapse_df <- function(df,lengthcol,nuccol,cores){
     odf <- df[order(df[[lengthcol]],decreasing=TRUE),]
-    reps <- mcmapply(FUN=function(x) which(str_detect(string=odf[[nuccol]], pattern=x) == TRUE)[1], odf[[nuccol]], SIMPLIFY=TRUE, USE.NAMES=FALSE, mc.cores=cores)
+    if(cores==1) {
+        reps <- mapply(FUN=function(x) which(str_detect(string=odf[[nuccol]], pattern=x) == TRUE)[1], odf[[nuccol]], SIMPLIFY=TRUE, USE.NAMES=FALSE)
+    } else {
+        reps <- mcmapply(FUN=function(x) which(str_detect(string=odf[[nuccol]], pattern=x) == TRUE)[1], odf[[nuccol]], SIMPLIFY=TRUE, USE.NAMES=FALSE, mc.cores=cores)
+    }
     ind <- unique(reps)
     dat <- odf[ind,]
     dat[["nHaps"]] <- as.numeric(table(reps))
