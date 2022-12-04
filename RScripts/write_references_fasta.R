@@ -11,7 +11,7 @@ write_references_fasta <- function(df,path=NULL) {
         dplyr::mutate(labelDadaTaxonomy=paste0(phylum,";",class,";",order,";",family,";",genus,";",sciNameValid,";")) %>%
         dplyr::mutate(labelDadaSpecies=paste(dbid,str_split_fixed(sciNameValid," ",2)[,1],str_split_fixed(sciNameValid," ",2)[,2]))
         # get version
-        gbv <- paste0("v",unique(pull(df.labs,genbankVersion)))
+        gbv <- paste0("v",unique(pull(df.labs,genbankVersion))[1])
         mbc <- unique(pull(df.labs,metabarcode))
     
     # make filenames
